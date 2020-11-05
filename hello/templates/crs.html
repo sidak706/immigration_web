@@ -1,0 +1,676 @@
+{% extends 'base.html' %}
+
+{% block title %} CRS Calculator {% endblock title %}
+{% block body %}
+<img src="/static/calc.jpg" class="d-block" style=" margin-bottom: 75px; width:100%; height:500px;"alt="...">
+
+<h1><div style="margin-left:5%;color:Red; font-size:30px;">Express Entry CRS Calculator: Calculate Your 
+Ranking Score in the Express Entry Pool</div></h1>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+mark {
+  background-color: yellow;
+  color: black;
+}
+.boxed {
+  border: 1px solid green ;
+  margin-top:10%;
+  text-align:center;
+  paddin-top:10px;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+.col-26 {
+  float: none;
+  width: 72%;
+  margin-bottom: 20px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.big-div{
+    display:flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.big-div input{
+    width:220px;
+    margin-bottom: 20px;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+
+
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <form action="/action_page.php">
+  <div class="row">
+    <div class="col-25">
+      <label for="age">How Old are you?</label>
+    </div>
+    <div class="col-75">
+      <select id="age" name="age">
+       <option value="Select">Select...</option>
+        <option value="17 or less">17 or less</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+         <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+         <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+         <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+         <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+         <option value="32">32</option>
+        <option value="33">33</option>
+        <option value="34">34</option>
+         <option value="35">35</option>
+        <option value="36">36</option>
+        <option value="37">37</option>
+         <option value="38">38</option>
+        <option value="39">39</option>
+        <option value="40">40</option>
+         <option value="41">41</option>
+        <option value="42">42</option>
+        <option value="43">43</option>
+         <option value="44">44</option>
+        <option value="45">45</option>
+        <option value="46">46</option>
+         <option value="47 or older">47 or older</option>
+      </select>
+    </div>
+    {% comment %} <div class="col-75">
+      <input type="number" id="age" name="age" placeholder="Select Your age">
+    </div> {% endcomment %}
+  </div>
+<div class="row">
+    <div class="col-25">
+      <label for="age">What is your highest level of completed education?</label>
+    </div>
+    <div class="col-75">
+      <select id="age" name="age">
+       <option value="Select your education">Select your education</option>
+        <option value="less than secondary">less than secondary</option>
+        <option value="secondary school credential">secondary school credential</option>
+        <option value="one-year post-secondary credential">one-year post-secondary credential</option>
+         <option value="two-year post-secondary credential">two-year post-secondary credential</option>
+        <option value="three-year or more post-secondary credential">three-year or more post-secondary credential</option>
+        <option value="two or more post-secondary credentials with at least one being 3+ years">two or more post-secondary credentials with at least one being 3+ years</option>
+         <option value="master's or entry-to-practice degree">master's or entry-to-practice degree</option>
+        <option value="PHD/doctoral certificate">PHD/doctoral certificate</option>
+        
+      </select>
+    </div>
+    {% comment %} <div class="col-75">
+      <input type="number" id="age" name="age" placeholder="Select Your age">
+    </div> {% endcomment %}
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="country">Have you studied in Canada</label>
+    </div>
+    <div class="col-75">
+    <input type="radio" name="joke" value="Yes" /> Yes 
+  <input type="radio" name="joke" value="No" /> No
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="age">English Proficiency</label>
+    </div>
+    <div class="big-div score">
+    <div><b>Reading:</b><br>
+        <select id="reading" class="form-control" required>
+        	<option value="0">Less than CLB 4</option>
+        	<option value="6">CLB 4</option>
+        	<option value="6">CLB 5</option>
+        	<option value="8">CLB 6</option>
+        	<option value="16">CLB 7</option>
+        	<option value="22">CLB 8</option>
+        	<option value="29">CLB 9</option>
+        	<option value="32">CLB 10 or more</option>
+        </select>
+    </div>
+    <div><b>Writing:</b><br>
+        <select id="writing" class="form-control" required>
+        	<option value="0">Less than CLB 4</option>
+        	<option value="6">CLB 4</option>
+        	<option value="6">CLB 5</option>
+        	<option value="8">CLB 6</option>
+        	<option value="16">CLB 7</option>
+        	<option value="22">CLB 8</option>
+        	<option value="29">CLB 9</option>
+        	<option value="32">CLB 10 or more</option>
+        </select>
+    </div>
+    <div><b>Listening:</b><br>
+        <select id="listening" class="form-control" required>
+        	<option value="0">Less than CLB 4</option>
+        	<option value="6">CLB 4</option>
+        	<option value="6">CLB 5</option>
+        	<option value="8">CLB 6</option>
+        	<option value="16">CLB 7</option>
+        	<option value="22">CLB 8</option>
+        	<option value="29">CLB 9</option>
+        	<option value="32">CLB 10 or more</option>
+        </select>
+    </div>
+    <div><b>Speaking:</b><br>
+        <select id="speaking" class="form-control" required>
+        	<option value="0">Less than CLB 4</option>
+        	<option value="6">CLB 4</option>
+        	<option value="6">CLB 5</option>
+        	<option value="8">CLB 6</option>
+        	<option value="16">CLB 7</option>
+        	<option value="22">CLB 8</option>
+        	<option value="29">CLB 9</option>
+        	<option value="32">CLB 10 or more</option>
+        </select>
+    </div>
+</div>		</div>
+    {% comment %} <div class="col-75">
+      <input type="number" id="age" name="age" placeholder="Select Your age">
+    </div> {% endcomment %}
+    <div class="row">
+    <div class="col-25" style="margin-top:5%;">
+      <label for="age">French Proficiency</label>
+    </div>
+    <div class="big-div score" style="margin-top:4%;">
+    <div><b>Reading:</b><br>
+        <select id="reading" class="form-control" required>
+        	<option value="0">Less than CLB 4</option>
+        	<option value="6">CLB 4</option>
+        	<option value="6">CLB 5</option>
+        	<option value="8">CLB 6</option>
+        	<option value="16">CLB 7</option>
+        	<option value="22">CLB 8</option>
+        	<option value="29">CLB 9</option>
+        	<option value="32">CLB 10 or more</option>
+        </select>
+    </div>
+    <div><b>Writing:</b><br>
+        <select id="writing" class="form-control" required>
+        	<option value="0">Less than CLB 4</option>
+        	<option value="6">CLB 4</option>
+        	<option value="6">CLB 5</option>
+        	<option value="8">CLB 6</option>
+        	<option value="16">CLB 7</option>
+        	<option value="22">CLB 8</option>
+        	<option value="29">CLB 9</option>
+        	<option value="32">CLB 10 or more</option>
+        </select>
+    </div>
+    <div><b>Listening:</b><br>
+        <select id="listening" class="form-control" required>
+        	<option value="0">Less than CLB 4</option>
+        	<option value="6">CLB 4</option>
+        	<option value="6">CLB 5</option>
+        	<option value="8">CLB 6</option>
+        	<option value="16">CLB 7</option>
+        	<option value="22">CLB 8</option>
+        	<option value="29">CLB 9</option>
+        	<option value="32">CLB 10 or more</option>
+        </select>
+    </div>
+    <div><b>Speaking:</b><br>
+        <select id="speaking" class="form-control" required>
+        	<option value="0">Less than CLB 4</option>
+        	<option value="6">CLB 4</option>
+        	<option value="6">CLB 5</option>
+        	<option value="8">CLB 6</option>
+        	<option value="16">CLB 7</option>
+        	<option value="22">CLB 8</option>
+        	<option value="29">CLB 9</option>
+        	<option value="32">CLB 10 or more</option>
+        </select>
+    </div>
+      
+</div>		</div>
+<p style= "color:red; text-align:left; margin-top:4%; margin-right:7%;"><strong>Skilled Work Experience</strong></p>
+
+<hr>
+
+
+
+
+<div class="row">
+    <div class="col-25">
+      <label for="age">How many years of full-time 
+      (30 hours per week or equivalent part-time) Skilled Work 
+      experience have you obtained <mark>OUTSIDE OF CANADA</mark> within the last 10 years?  </label>
+    </div>
+
+ <div class="col-75" style="margin-top:2%;">
+      <select id="age" name="age">
+       <option value="Select">None</option>
+        <option value="17 or less">less than one year</option>
+        <option value="18">less than one year</option>
+        <option value="19">two years</option>
+        <option value="20">three years</option>
+        <option value="21">four years</option>
+        <option value="22">five years</option>
+        <option value="23">six years or more</option>
+        
+        </select>
+    </div>
+        
+
+<div class="row">
+    <div class="col-25" style="margin-left:1.5%;">
+      <label for="age">How many years of full-time (30 hours per week or equivalent part-time)
+      <b>continuous Skilled Work experience</b> have you obtained 
+      <mark>INSIDE CANADA</mark> within the last 10 years?   </label>
+    </div>
+
+ <div class="col-26" style="margin-top:2%;" >
+      <select id="age" name="age">
+       <option value="Select">None</option>
+        <option value="17 or less">less than one year</option>
+        <option value="18">less than one year</option>
+        <option value="19">two years</option>
+        <option value="20">three years</option>
+        <option value="21">four years</option>
+        <option value="22">five years</option>
+        <option value="23">six years or more</option>
+        
+        </select>
+        
+    </div>
+ <div class="row">
+    <div class="col-26" style="margin-left:10%; display:inline:block;">
+      <label for="age">Are you Married or in a Common-Law Partnership?  </label>
+    </div>
+
+ {% comment %} <div class="col-26" style="margin-top:2%;" >
+      <select id="age" name="age">
+       <option value="Select">None</option>
+        <option value="17 or less">less than one year</option>
+        <option value="18">less than one year</option>
+        <option value="19">two years</option>
+        <option value="20">three years</option>
+        <option value="21">four years</option>
+        <option value="22">five years</option>
+        <option value="23">six years or more</option>
+        
+        </select>
+         {% endcomment %}
+    </div>
+    <div class="col-25" style="margin-top:3%;">
+<input type="radio" name="joke" value="bed" /> Yes
+  <input type="radio" name="joke" value="clock" /> No
+</div>
+
+ <div class="row">
+    <div class="col-25" style="margin-left:3%;">
+      <label for="age">Do you or your spouse/common-law partner have a sibling (brother or sister)
+       who is a Canadian citizen or permanent resident, 
+      who is currently living in Canada and is 18 years of age or older?     </label>
+    </div>
+     <div class="col-25" style="margin-top:3%; margin-left:4.48%;">
+<input type="radio" name="joke" value="bed" /> Yes
+  <input type="radio" name="joke" value="clock" /> No
+</div>
+
+
+ <div class="row">
+    <div class="col-25" style="margin-left:4%;">
+      <label for="age">Do you have a trades Certificate of Qualification
+       issued by a Canadian Province or Territory (excluding Quebec and Nunavut)      </label>
+    </div>
+     <div class="col-25" style="margin-top:3%; margin-left:4%;">
+<input type="radio" name="joke" value="bed" /> Yes
+  <input type="radio" name="joke" value="clock" /> No
+</div>
+<p style="margin-left:5%;">Applicants can obtain extra points for Qualifying offers of Arranged Employment and Provincial Nomination Certificates  </p>
+
+ <div class="row">
+    <div class="col-25" style="margin-left:7%;">
+      <label for="age">Have you applied for and received a Nomination Certificate 
+      from a Canadian Province or Territory? (excluding Quebec and Nunavut)       </label>
+    </div>
+    <div class="col-25" style="margin-top:3%; margin-left:1.5%;">
+<input type="radio" name="joke" value="yes" /> Yes
+  <input type="radio" name="joke" value="no" /> No
+</div>
+<p style="margin-bottom:4%;margin-left:6%;">Do you have a skilled job offer from a Canadian employer?  </p>
+
+
+<div class="col-25" style="margin-bottom:1%; margin-left:5%;">
+<input type="radio" name="joke" value="yes" /> Yes
+  <input type="radio" name="joke" value="no" /> No
+ 
+</div>
+</div>
+
+
+ <div class="form-group">
+    <label for="phone"style="margin-left:30%;">Phone number</label>
+    <input type="number"  style="margin-left:30%; "class="col-75" id="phone" name="phone" placeholder="Enter your phone number">
+  </div>
+
+ <div class="form-group">
+    <label for="phone"style="margin-left:30%;">Email</label>
+    <input type="email"  style="margin-left:30%; "class="col-75" id="phone" name="phone" placeholder="Enter your mail id">
+  </div>
+
+     <div class="form-group">
+    <label for="phone"style="margin-left:10%;">Country of Residence</label>
+    <select id="country" name="country" class="form-control" style="margin-left:10%;">
+                <option value="Select">Select...</option>
+                <option value="Afghanistan">Afghanistan</option>
+                <option value="Åland Islands">Åland Islands</option>
+                <option value="Albania">Albania</option>
+                <option value="Algeria">Algeria</option>
+                <option value="American Samoa">American Samoa</option>
+                <option value="Andorra">Andorra</option>
+                <option value="Angola">Angola</option>
+                <option value="Anguilla">Anguilla</option>
+                <option value="Antarctica">Antarctica</option>
+                <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Armenia">Armenia</option>
+                <option value="Aruba">Aruba</option>
+                <option value="Australia">Australia</option>
+                <option value="Austria">Austria</option>
+                <option value="Azerbaijan">Azerbaijan</option>
+                <option value="Bahamas">Bahamas</option>
+                <option value="Bahrain">Bahrain</option>
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="Barbados">Barbados</option>
+                <option value="Belarus">Belarus</option>
+                <option value="Belgium">Belgium</option>
+                <option value="Belize">Belize</option>
+                <option value="Benin">Benin</option>
+                <option value="Bermuda">Bermuda</option>
+                <option value="Bhutan">Bhutan</option>
+                <option value="Bolivia">Bolivia</option>
+                <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                <option value="Botswana">Botswana</option>
+                <option value="Bouvet Island">Bouvet Island</option>
+                <option value="Brazil">Brazil</option>
+                <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                <option value="Brunei Darussalam">Brunei Darussalam</option>
+                <option value="Bulgaria">Bulgaria</option>
+                <option value="Burkina Faso">Burkina Faso</option>
+                <option value="Burundi">Burundi</option>
+                <option value="Cambodia">Cambodia</option>
+                <option value="Cameroon">Cameroon</option>
+                <option value="Canada">Canada</option>
+                <option value="Cape Verde">Cape Verde</option>
+                <option value="Cayman Islands">Cayman Islands</option>
+                <option value="Central African Republic">Central African Republic</option>
+                <option value="Chad">Chad</option>
+                <option value="Chile">Chile</option>
+                <option value="China">China</option>
+                <option value="Christmas Island">Christmas Island</option>
+                <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Comoros">Comoros</option>
+                <option value="Congo">Congo</option>
+                <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The</option>
+                <option value="Cook Islands">Cook Islands</option>
+                <option value="Costa Rica">Costa Rica</option>
+                <option value="Cote D'ivoire">Cote D'ivoire</option>
+                <option value="Croatia">Croatia</option>
+                <option value="Cuba">Cuba</option>
+                <option value="Cyprus">Cyprus</option>
+                <option value="Czech Republic">Czech Republic</option>
+                <option value="Denmark">Denmark</option>
+                <option value="Djibouti">Djibouti</option>
+                <option value="Dominica">Dominica</option>
+                <option value="Dominican Republic">Dominican Republic</option>
+                <option value="Ecuador">Ecuador</option>
+                <option value="Egypt">Egypt</option>
+                <option value="El Salvador">El Salvador</option>
+                <option value="Equatorial Guinea">Equatorial Guinea</option>
+                <option value="Eritrea">Eritrea</option>
+                <option value="Estonia">Estonia</option>
+                <option value="Ethiopia">Ethiopia</option>
+                <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                <option value="Faroe Islands">Faroe Islands</option>
+                <option value="Fiji">Fiji</option>
+                <option value="Finland">Finland</option>
+                <option value="France">France</option>
+                <option value="French Guiana">French Guiana</option>
+                <option value="French Polynesia">French Polynesia</option>
+                <option value="French Southern Territories">French Southern Territories</option>
+                <option value="Gabon">Gabon</option>
+                <option value="Gambia">Gambia</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Germany">Germany</option>
+                <option value="Ghana">Ghana</option>
+                <option value="Gibraltar">Gibraltar</option>
+                <option value="Greece">Greece</option>
+                <option value="Greenland">Greenland</option>
+                <option value="Grenada">Grenada</option>
+                <option value="Guadeloupe">Guadeloupe</option>
+                <option value="Guam">Guam</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Guernsey">Guernsey</option>
+                <option value="Guinea">Guinea</option>
+                <option value="Guinea-bissau">Guinea-bissau</option>
+                <option value="Guyana">Guyana</option>
+                <option value="Haiti">Haiti</option>
+                <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
+                <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                <option value="Honduras">Honduras</option>
+                <option value="Hong Kong">Hong Kong</option>
+                <option value="Hungary">Hungary</option>
+                <option value="Iceland">Iceland</option>
+                <option value="India">India</option>
+                <option value="Indonesia">Indonesia</option>
+                <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                <option value="Iraq">Iraq</option>
+                <option value="Ireland">Ireland</option>
+                <option value="Isle of Man">Isle of Man</option>
+                <option value="Israel">Israel</option>
+                <option value="Italy">Italy</option>
+                <option value="Jamaica">Jamaica</option>
+                <option value="Japan">Japan</option>
+                <option value="Jersey">Jersey</option>
+                <option value="Jordan">Jordan</option>
+                <option value="Kazakhstan">Kazakhstan</option>
+                <option value="Kenya">Kenya</option>
+                <option value="Kiribati">Kiribati</option>
+                <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                <option value="Korea, Republic of">Korea, Republic of</option>
+                <option value="Kuwait">Kuwait</option>
+                <option value="Kyrgyzstan">Kyrgyzstan</option>
+                <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                <option value="Latvia">Latvia</option>
+                <option value="Lebanon">Lebanon</option>
+                <option value="Lesotho">Lesotho</option>
+                <option value="Liberia">Liberia</option>
+                <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                <option value="Liechtenstein">Liechtenstein</option>
+                <option value="Lithuania">Lithuania</option>
+                <option value="Luxembourg">Luxembourg</option>
+                <option value="Macao">Macao</option>
+                <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav Republic of</option>
+                <option value="Madagascar">Madagascar</option>
+                <option value="Malawi">Malawi</option>
+                <option value="Malaysia">Malaysia</option>
+                <option value="Maldives">Maldives</option>
+                <option value="Mali">Mali</option>
+                <option value="Malta">Malta</option>
+                <option value="Marshall Islands">Marshall Islands</option>
+                <option value="Martinique">Martinique</option>
+                <option value="Mauritania">Mauritania</option>
+                <option value="Mauritius">Mauritius</option>
+                <option value="Mayotte">Mayotte</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
+                <option value="Moldova, Republic of">Moldova, Republic of</option>
+                <option value="Monaco">Monaco</option>
+                <option value="Mongolia">Mongolia</option>
+                <option value="Montenegro">Montenegro</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Morocco">Morocco</option>
+                <option value="Mozambique">Mozambique</option>
+                <option value="Myanmar">Myanmar</option>
+                <option value="Namibia">Namibia</option>
+                <option value="Nauru">Nauru</option>
+                <option value="Nepal">Nepal</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="Netherlands Antilles">Netherlands Antilles</option>
+                <option value="New Caledonia">New Caledonia</option>
+                <option value="New Zealand">New Zealand</option>
+                <option value="Nicaragua">Nicaragua</option>
+                <option value="Niger">Niger</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="Niue">Niue</option>
+                <option value="Norfolk Island">Norfolk Island</option>
+                <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                <option value="Norway">Norway</option>
+                <option value="Oman">Oman</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="Palau">Palau</option>
+                <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+                <option value="Panama">Panama</option>
+                <option value="Papua New Guinea">Papua New Guinea</option>
+                <option value="Paraguay">Paraguay</option>
+                <option value="Peru">Peru</option>
+                <option value="Philippines">Philippines</option>
+                <option value="Pitcairn">Pitcairn</option>
+                <option value="Poland">Poland</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Puerto Rico">Puerto Rico</option>
+                <option value="Qatar">Qatar</option>
+                <option value="Reunion">Reunion</option>
+                <option value="Romania">Romania</option>
+                <option value="Russian Federation">Russian Federation</option>
+                <option value="Rwanda">Rwanda</option>
+                <option value="Saint Helena">Saint Helena</option>
+                <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                <option value="Saint Lucia">Saint Lucia</option>
+                <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
+                <option value="Samoa">Samoa</option>
+                <option value="San Marino">San Marino</option>
+                <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                <option value="Saudi Arabia">Saudi Arabia</option>
+                <option value="Senegal">Senegal</option>
+                <option value="Serbia">Serbia</option>
+                <option value="Seychelles">Seychelles</option>
+                <option value="Sierra Leone">Sierra Leone</option>
+                <option value="Singapore">Singapore</option>
+                <option value="Slovakia">Slovakia</option>
+                <option value="Slovenia">Slovenia</option>
+                <option value="Solomon Islands">Solomon Islands</option>
+                <option value="Somalia">Somalia</option>
+                <option value="South Africa">South Africa</option>
+                <option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich Islands</option>
+                <option value="Spain">Spain</option>
+                <option value="Sri Lanka">Sri Lanka</option>
+                <option value="Sudan">Sudan</option>
+                <option value="Suriname">Suriname</option>
+                <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                <option value="Swaziland">Swaziland</option>
+                <option value="Sweden">Sweden</option>
+                <option value="Switzerland">Switzerland</option>
+                <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                <option value="Taiwan, Province of China">Taiwan, Province of China</option>
+                <option value="Tajikistan">Tajikistan</option>
+                <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                <option value="Thailand">Thailand</option>
+                <option value="Timor-leste">Timor-leste</option>
+                <option value="Togo">Togo</option>
+                <option value="Tokelau">Tokelau</option>
+                <option value="Tonga">Tonga</option>
+                <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                <option value="Tunisia">Tunisia</option>
+                <option value="Turkey">Turkey</option>
+                <option value="Turkmenistan">Turkmenistan</option>
+                <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                <option value="Tuvalu">Tuvalu</option>
+                <option value="Uganda">Uganda</option>
+                <option value="Ukraine">Ukraine</option>
+                <option value="United Arab Emirates">United Arab Emirates</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="United States">United States</option>
+                <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                <option value="Uruguay">Uruguay</option>
+                <option value="Uzbekistan">Uzbekistan</option>
+                <option value="Vanuatu">Vanuatu</option>
+                <option value="Venezuela">Venezuela</option>
+                <option value="Viet Nam">Viet Nam</option>
+                <option value="Virgin Islands, British">Virgin Islands, British</option>
+                <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                <option value="Wallis and Futuna">Wallis and Futuna</option>
+                <option value="Western Sahara">Western Sahara</option>
+                <option value="Yemen">Yemen</option>
+                <option value="Zambia">Zambia</option>
+                <option value="Zimbabwe">Zimbabwe</option>
+            </select>
+    {% comment %} <input type="numbers"  style="margin-left:30%; "class="col-75" id="phone" name="phone" placeholder="Enter your Country"> {% endcomment %}
+  </div>
+
+  </form>
+
+
+    
+
+{% endblock body %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %} About us {% endblock title %}
+{% block body %}
+
+
+<div class="container-fluid my-0 px-0">
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/static/flag.jpg" alt="Paris" height="355" width="880" style="vertical-align:middle;margin:10px 50px">
+     <h1><div class="centered">About Us</div></h1>
+
+{% comment %} <h1 class= "my-3 text-center">Awards</h1> {% endcomment %}
+<div class="container">
+			<div class="row"></div>
+				<div class="col-md-4 p-b-30 animated fadeInUp px-10" data-animation="fadeInUp" data-delay="300ms"></div>
+					<div class="wrap-text-welcome t-center"></div>
+						{% comment %} <h4 class="bnt">OMOTEC<sup>™</sup></h4> {% endcomment %}
+						<div>
+						<h1 style="color:purple; text-align:center"> <strong>On My Own Technology</strong></h1>
+						<p class="bnt ">{% lorem 4 b random %}</p>
+					</div>			
+					</div>
+					
+					
+
+
+<style>
+
+.bst {
+  font-size: 30px;
+  {% comment %} cursor: pointer; {% endcomment %}
+  {% comment %} position: relative; {% endcomment %}
+  {% comment %} margin: 0; {% endcomment %}
+  position: relative;
+  top: 255%;
+  left: 140%;
+  color: black;
+  {% comment %} -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); {% endcomment %}
+}
+
+{% comment %} /* Darker background on mouse-over */
+.btn:hover {
+  background-color: red;
+} {% endcomment %}
+</style>
+
+<style>
+.bnt {
+  font-size: 15px;
+  top: 15%
+  {% comment %} cursor: pointer; {% endcomment %}
+  {% comment %} position: relative; {% endcomment %}
+  margin: 0;
+  line-height:normal;
+  {% comment %} position: relative; {% endcomment %}
+  {% comment %} top: 255%; {% endcomment %}
+  text-align: center;
+  {% comment %} overflow: auto; {% endcomment %}
+
+  font-family:times new roman;
+  line-height: 1.6; 
+}
+}
+
+{% comment %} /* Darker background on mouse-over */
+.btn:hover {
+  background-color: red;
+} {% endcomment %}
+</style>
+
+<style>
+.centered {
+  position: absolute;
+  top: 12%;
+  left: 43%;
+  {% comment %} transform: translate(-50%, -50%); {% endcomment %}
+  font-size: 45px;
+  
+
+}
+</style>
+
+
+<img src="/static/founder.jpg" alt="Avatar" style="width:200px;border-radius: 50%;  left: 140%; ">
+{% endblock body %}
+{% comment %} <button onclick="typeWriter()">Click me</button> {% endcomment %}

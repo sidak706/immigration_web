@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>{% block title %} {% endblock title %}  ppe.com  </title>
+  </head>
+  <body>
+<style>
+* {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Josefin Sans';
+        }
+
+        .navbar {
+            font-size: 20px;
+            background-image: linear-gradient(260deg, #2376ae 0%, #c16ecf 100%);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            padding-bottom: 20px;
+            position: fixed;
+            z-index: 99999; 
+            
+        }
+
+        .main-nav {
+            list-style-type: none;
+            display: none;
+        }
+
+        .nav-links,
+        .logo {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .main-nav li {
+            text-align: center;
+            margin: auto;
+        }
+
+        .logo {
+            display: inline-block;
+            font-size: 22px;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+
+        .navbar-toggle {
+            position: relative;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 24px;
+        }
+
+        .active {
+            display: block;
+        }
+
+        @media screen and (min-width: 768px) {
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 0;
+                height: 70px;
+                align-items: center;
+                width: 100%;
+                
+            }
+
+            .main-nav {
+                display: flex;
+                margin-right: 20px;
+                flex-direction: row;
+                justify-content: right;
+            }
+
+            .main-nav li {
+                margin: 5;
+            }
+
+            .nav-links {
+                margin-left: 30px;
+            }
+
+            .logo {
+                margin-top: 0;
+            }
+
+            .navbar-toggle {
+                display: none;
+            }
+            
+
+            .logo:hover,
+            .nav-links:hover {
+                color: rgba(255, 255, 255, 1);
+            }
+        }
+        .dropbtn {
+  background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    color: white; 
+    font-family: 'Josefin Sans',;
+  padding: 13px;
+  font-size: 20px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  font-weight: bold;
+  color: black;
+  padding: 8px 10px;
+  text-decoration: none;
+  display: block;
+  font-size: 17px;
+}
+a:hover {
+                color: purple;
+            }
+.icon-bar {
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  
+}
+
+.icon-bar a {
+  margin-bottom: 8px;
+  display: block;
+  text-align: center;
+  padding: 5px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+    border-radius: 138px;
+  border: 5px solid;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  display: block;
+  line-height: 1px;
+  padding-top: 5px;
+  transition: all 0.5s;
+}
+
+.icon-bar a:hover {
+  transform: rotate(360deg)scale(1.3);
+}
+
+.facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.google {
+  background: #dd4b39;
+  color: white;
+}
+
+.linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.youtube {
+  background: #bb0000;
+  color: white;
+}
+.instagram {
+  background: #3f729b;
+  color: white;
+}
+
+.content {
+  margin-left: 50px;
+  font-size: 30px;
+}
+
+
+.dropdown-content a:hover {background-color:Transparent;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: rgba(0,0,0,0.2;}
+
+
+
+
+
+
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+        <span class="navbar-toggle" id="js-navbar-toggle">
+            <i class="fas fa-bars"></i>
+        </span>
+        <a href="#" class="logo">logo</a>
+        <ul class="main-nav" id="js-menu">
+            <li>
+                <a href='/home' class="nav-links">Home</a>
+            </li>
+            <li>
+            {% comment %} <a href="#" class="nav-links">Immigrate to Canada</a> {% endcomment %}
+             <div class="dropdown">
+  <button class="dropbtn">Immigrate to Canada</button>
+  <div class="dropdown-content">
+    <a href="/ex">Express Entry</a>
+    <a href="/crs">LMIA</a>
+    <a href="/pnp">Provincial Nomination Program</a>
+    <a href="#">Business and Investor</a>
+    <a href="#">Atlantic Immigration</a>
+    <a href="#">Permanent Residency</a>
+    <a href="#">Rural and Nothern Immigration Pilot</a>
+    <a href="#">Agri-Food Immigration Pilot</a>
+  </div>
+</div>
+
+
+
+            </li>
+             <div class="dropdown">
+  <button class="dropbtn">Visa Services</button>
+  <div class="dropdown-content">
+    <a href="/ex">Student Visa</a>
+    <a href="#">Work Permit</a>
+    <a href="#">Study Permit</a>
+    <a href="#">Super Visa</a>
+    <a href="#">Visitor Visa</a>
+  </div>
+</div>
+ <div class="dropdown">
+  <button class="dropbtn">Get Started</button>
+  <div class="dropdown-content">
+    <a href="/ex">Free Online Assessment</a>
+    <a href="/contact">Provincial Nominee Program Calculator</a>
+    <a href="#">Express Entry Points Calculator</a>
+    <a href="#">Federal Skilled Worker</a>
+  </div>
+</div>
+<li>
+                <a href='/services' class="nav-links">Legal Help</a>
+            </li>
+           
+            <li>
+                
+ <div class="dropdown">
+  <button class="dropbtn">Sponsor</button>
+  <div class="dropdown-content">
+    <a href="/ex">Family Sponsorship</a>
+  </div>
+</div>
+            </li>
+             <li>
+                <a href='/contact' class="nav-links">Contact</a>
+            </li>
+            {% comment %} <li>
+                <a href="#" class="nav-links">Contact Us</a>
+            </li> 
+            
+            {% comment %} <li>
+                <a href="#" class="nav-links">Get Started</a>
+            </li>
+            <li>
+                <a href="#" class="nav-links">About us</a>
+            </li>
+            <li>
+                <a href="#" class="nav-links">Contact us</a>
+            </li> {% endcomment %}
+        </ul>
+    </nav>
+{% comment %} <section class="banner-area" id="home">
+</section> {% endcomment %}
+
+
+</nav>
+<div class="icon-bar">
+  <a href="#" class="facebook"><i class="fa fa-facebook"></i></a> 
+  {% comment %} <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>  {% endcomment %}
+  <a href="#" class="google"><i class="fa fa-google"></i></a> 
+  <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+  <a href="#" class="youtube"><i class="fa fa-youtube"></i></a> 
+  <a href="#" class="instagram"><i class="fa fa-instagram"></i></a> 
+  {% comment %} <a href="#" class="fa-instagram"><i class="fa fa-instagram"></i></a>  {% endcomment %}
+</div>
+
+
+
+
+
+
+
+{% comment %} <style> {% endcomment %}
+{% comment %} ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+}
+
+}
+</style> {% endcomment %}
+
+
+
+{% comment %} <ul class="messages">
+    
+    <li{% if message.tags %} class=""{% endif %}></li>
+    
+</ul> {% endcomment %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show my=0" role="alert">
+<strong>{{ message }}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+
+<style>
+
+{% comment %} ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+} {% endcomment %}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+}
+
+}
+</style>
+
+
+
+{% block body %}
+{% endblock body %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
